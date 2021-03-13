@@ -30,7 +30,7 @@ def get_module_data(module_name = "YerrabelliFlask"):
         "version": versioneer.get_version(),  # str that includes git commit id per PEP format
         "cmdclass": versioneer.get_cmdclass(),
         "packages": setuptools.find_packages(),  # list, i.e. [""]
-        "url": "https://github.com/ryerrabelli/" + module_name,
+        #"url": "https://github.com/ryerrabelli/" + module_name,
         "license": license_text,
         "author": "Rahul Yerrabelli",
         "author_email": "ryerrabelli@gmail.com",
