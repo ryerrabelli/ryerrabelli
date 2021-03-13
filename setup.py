@@ -11,14 +11,9 @@
 import setuptools
 import os
 import versioneer
-from __init__ import get_module_data
+import main
 
-#############################################
-# BELOW LINE(S) MUST BE CHANGED FOR EVERY DIFFERENT PROJECT
-module_name = "ryerrabelli"
-#############################################
-
-module_data = get_module_data(module_name=module_name)
+module_data = main.get_module_data(module_name="ryerrabelli")
 
 print(module_data)
 # Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...)
