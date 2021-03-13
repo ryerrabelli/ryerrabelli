@@ -1,21 +1,28 @@
-# This is a sample Python script.
-
-# Press ⇧F10 to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, filenames, tool windows, actions, and settings.
-
 import setuptools
 import os
-
 import versioneer
 
-import ryerrabelli as rsy
+# Actions in "try:" happen when ryerrabelli module is used to set up any module besides ryerrabelli.
+# Actions in "except:" happen when the ryerrabelli module is being setup itself, using the ryerrabelli module.
+# Can't use the regular import statements when installing ryerrabelli bc ryerrabelli will not already be installed
+# (duh), so can't import it, except by importing it as a relative path To keep the code the same, the renaming of the
+# module(s) to "rsy" is helpful. However, for the relative import, we can only have one module named as rsy as we
+# need one import statement per module (as opposed to one import statement for the entire package as done when
+# ryerrabelli is used external code). Fortunately, each file that imports ryerrabelli only requires functions from
+# one other module. The setup.py file only needs to import ryerrabelli functions that are in main.py (doesn't need
+# any functions in utils.py) and main.py only needs to import functions from util.py
+# ***NOTE: Above message is present in multiple files. Update text in all if comment is changed.
+try:
+    import ryerrabelli as rsy
+except ImportError as e:
+    from . import utils as rsy
+
 
 if __name__ == "__main__":
     from _version import get_versions
     __version__ = get_versions()['version']
     del get_versions
     print(f"__version__ = {__version__}")
-
 
 
 def get_var_from_file(file_choices,
@@ -154,23 +161,22 @@ def get_module_data(module_name, extra_module_data=None, force=False):
     }
     assert force or not any([extra_key in standard_module_data.keys() for extra_keykey in extra_module_data.keys()]), f"force or not any([extra_key in standard_module_data.keys() for extra_keykey in extra_module_data.keys()]) is wrong for standard_module_data={standard_module_data}, extra_module_data={extra_module_data}, force={force}"
 
-
-    combined_modula_data = combine(standard_module_data, extra_module_data, default=extra_module_data)
-
+    combined_modula_data = combine_two(standard_module_data, extra_module_data, default=extra_module_data)
 
     print(combined_modula_data)
+
     # Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...)
     # Save it as a dict first so we can print it out
     return combined_modula_data
 
 
-def combine(obj0, obj1, default = None, default_ind=0):
+def combine_two(obj0, obj1, default=None, default_ind=0):
     if default is None:
         default = obj0 if default_ind == 0 else obj1
     if isinstance(obj0, dict) and isinstance(obj1, dict):
         dict12 = {**obj0, **obj1}  # Combines the dicts. However, obj1's value will have be used if keys are the same (even if the value are combinable objects like lists)
         for conflicted_key in set(obj0).intersection(obj1):  # Go through and try to combine each conflict
-            dict12[conflicted_key] = combine(
+            dict12[conflicted_key] = combine_two(
                 obj0=obj0[conflicted_key],
                 obj1=obj1[conflicted_key],
                 default=default[conflicted_key]
@@ -183,7 +189,7 @@ def combine(obj0, obj1, default = None, default_ind=0):
 
 
 """
-#NOT Finished
+# NOT Finished and NOT Needed right now; combine_two function above is sufficient for now
 def combine_all(*objs, default = None, default_ind = 0):
     if default is None:
         default = objs[default_ind]
