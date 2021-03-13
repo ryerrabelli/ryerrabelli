@@ -6,9 +6,8 @@
 import setuptools
 import os
 
-import versioneer
+from ryerrabelli import versioneer
 
-import utils
 import ryerrabelli as rsy
 
 
@@ -68,18 +67,27 @@ def extension_to_format(extension, default=""):
 
 
 #, path=os.path.abspath(os.curdir)
-def get_module_data(module_name):
+def get_module_data(module_name, extra_module_data=None, force=False):
     """
     Note- this uses module os to get filenames from a relativ file path. Assuming that this is being run and imported by another program, the file path will be relative to the original program (as intended) and thus will use that python module's filenames (i.e. that module's LICENSE.txt, not this module's)
 
+    The extra_module_data and force functionality are currently untested.
 
     :param module_name:
     :type module_name: str
-    :return:
+    :return: module information that should be passed on to setuptools.setup
     :rtype: dict, need to apply ** operation (i.e. **returned_dict) before sending to setuptools.setup
     """
+    if extra_module_data is None:
+        extra_module_data = {}
+    # Definiton of rsy.f has to come before other definitions bc other ones rely on it
+    if rsy.filenames is None:
+        rsy.filenames = [file.lower() for file in os.listdir()]
+        if os.path.exists("docs"):
+            rsy.filenames += [("docs" + os.sep + file.lower()) for file in os.listdir("docs")]
+
     # get_var_from_file(.) input is case insensitive, but most common case styles are shown for illustrative purposes
-    if not rsy.long_descrip or not rsy.long_descrip_filename:
+    if rsy.long_descrip is None or rsy.long_descrip_filename is None:
         rsy.long_descrip, rsy.long_descrip_filename \
             = get_var_from_file(["README", "README.txt", "README.md", "README.rs",
                                  "README-template", "README-template.txt",
@@ -87,28 +95,24 @@ def get_module_data(module_name):
                                 lambda file: file.read(),  # Get string of text
                                 default=("", None),
                                 )
-    if not rsy.requirements:
+    if rsy.requirements is None:
         rsy.requirements, _ \
             = get_var_from_file(["requirements", "requirements.txt"],
                                 lambda file: [line.strip() for line in file],  # Get list of (str) requirements
                                 default=([], None),
                                 )
-    if not rsy.license_text:
+    if rsy.license_text is None:
         # Can't name below variable license bc license() returns the python license
         rsy.license_text, _ \
             = get_var_from_file(["LICENSE", "LICENSE.txt", "LICENSE.md", "LICENSE.rtf"],
                                 lambda file: file.read(),  # Get string of text
                                 default=("", None),
                                 )
-    if not rsy.filenames:
-        rsy.filenames = [file.lower() for file in os.listdir()]
-        if os.path.exists("docs"):
-            rsy.filenames += [("docs" + os.sep + file.lower()) for file in os.listdir("docs")]
 
     # For details on how to document, see:
     # https://packaging.python.org/guides/distributing-packages-using-setuptools/#setup-py
     # Calls to versioneer are not to get versions of the ryerrabelli package, but to get the version of the original package.
-    module_data = {
+    standard_module_data = {
         "name": module_name,
         "version": versioneer.get_version(),  # str that includes git commit id per PEP format
         "cmdclass": versioneer.get_cmdclass(),
@@ -149,8 +153,56 @@ def get_module_data(module_name):
             ],
 
     }
-    print(module_data)
+    assert force or not any([extra_key in standard_module_data.keys() for extra_keykey in extra_module_data.keys()]), f"force or not any([extra_key in standard_module_data.keys() for extra_keykey in extra_module_data.keys()]) is wrong for standard_module_data={standard_module_data}, extra_module_data={extra_module_data}, force={force}"
+
+
+    combined_modula_data = combine(standard_module_data, extra_module_data, default=extra_module_data)
+
+
+    print(combined_modula_data)
     # Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...)
     # Save it as a dict first so we can print it out
-    return module_data
+    return combined_modula_data
 
+
+def combine(obj0, obj1, default = None, default_ind=0):
+    if default is None:
+        default = obj0 if default_ind == 0 else obj1
+    if isinstance(obj0, dict) and isinstance(obj1, dict):
+        dict12 = {**obj0, **obj1}  # Combines the dicts. However, obj1's value will have be used if keys are the same (even if the value are combinable objects like lists)
+        for conflicted_key in set(obj0).intersection(obj1):  # Go through and try to combine each conflict
+            dict12[conflicted_key] = combine(
+                obj0=obj0[conflicted_key],
+                obj1=obj1[conflicted_key],
+                default=default[conflicted_key]
+            )
+        return dict12
+    elif isinstance(obj0, list) and isinstance(obj1, list):
+        return obj0 + obj1   # Concatenate lists
+    else:
+        return default
+
+
+"""
+#NOT Finished
+def combine_all(*objs, default = None, default_ind = 0):
+    if default is None:
+        default = objs[default_ind]
+    if all(isinstance(obj, dict) for obj in objs):
+        dict12 = {**obj for obj in objs}  # Combines the dicts. However, obj1 will have be used if keys are the same (even if the value are combinable objects like lists)
+        # need to modify below line bc intersection gets only those keys where all dicts conflict; need to also find the keys where only some of the objs conflict
+        conflicting_keys = set.intersection(*(set(x) for x in objs))
+        for conflicted_key in conflicting_keys:  # Go through and try to combine each conflict
+            dict12[conflicted_key] = combine(
+                *(objs[conflicted_key]),
+                default=default[conflicted_key]
+            )
+        return dict12
+    elif all(isinstance(obj, list) for obj in objs):
+        sum = []
+        for obj in objs:
+            sum += obj
+        return sum
+    else:
+        return default
+"""

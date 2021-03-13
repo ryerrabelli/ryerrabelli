@@ -12,6 +12,6 @@ long_descrip_filename = None
 requirements = None
 license_text = None
 
-filenames = []
+filenames = None
 
 
