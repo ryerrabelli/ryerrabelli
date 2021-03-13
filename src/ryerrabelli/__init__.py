@@ -6,9 +6,9 @@ Standard information / code to create a python project (specifically a package).
 """
 
 
-from src.ryerrabelli.main import *
+from ryerrabelli.main import *
 
-from src.ryerrabelli.utils import *
+from ryerrabelli.utils import *
 
 
 
