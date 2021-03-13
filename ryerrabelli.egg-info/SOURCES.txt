@@ -1,0 +1,10 @@
+MANIFEST.in
+_version.py
+setup.cfg
+setup.py
+versioneer.py
+ryerrabelli.egg-info/PKG-INFO
+ryerrabelli.egg-info/SOURCES.txt
+ryerrabelli.egg-info/dependency_links.txt
+ryerrabelli.egg-info/requires.txt
+ryerrabelli.egg-info/top_level.txt

@@ -38,7 +38,7 @@ def get_var_from_file(file_choices,
     :rtype: tuple of (type of func return, str)
     """
     def file_exists(path, use_list=True):
-        return path.lower() in filenames if use_list else os.path.exists(path)
+        return path.lower() in rsy.filenames if use_list else os.path.exists(path)
     for filename in file_choices:
         if file_exists(doc_folder + os.sep + filename):
             filename = doc_folder + os.sep + filename
@@ -68,13 +68,13 @@ def extension_to_format(extension, default=""):
 
 
 #, path=os.path.abspath(os.curdir)
-def get_module_data(package_name):
+def get_module_data(module_name):
     """
     Note- this uses module os to get filenames from a relativ file path. Assuming that this is being run and imported by another program, the file path will be relative to the original program (as intended) and thus will use that python module's filenames (i.e. that module's LICENSE.txt, not this module's)
 
 
-    :param package_name:
-    :type package_name: str
+    :param module_name:
+    :type module_name: str
     :return:
     :rtype: dict, need to apply ** operation (i.e. **returned_dict) before sending to setuptools.setup
     """
@@ -100,19 +100,20 @@ def get_module_data(package_name):
                                 lambda file: file.read(),  # Get string of text
                                 default=("", None),
                                 )
-    if not rsy._filenames:
-        filenames = [file.lower() for file in os.listdir()]
+    if not rsy.filenames:
+        rsy.filenames = [file.lower() for file in os.listdir()]
         if os.path.exists("docs"):
-            filenames += [("docs" + os.sep + file.lower()) for file in os.listdir("docs")]
+            rsy.filenames += [("docs" + os.sep + file.lower()) for file in os.listdir("docs")]
 
     # For details on how to document, see:
     # https://packaging.python.org/guides/distributing-packages-using-setuptools/#setup-py
+    # Calls to versioneer are not to get versions of the ryerrabelli package, but to get the version of the original package.
     module_data = {
-        "name": package_name,
+        "name": module_name,
         "version": versioneer.get_version(),  # str that includes git commit id per PEP format
         "cmdclass": versioneer.get_cmdclass(),
         "packages": setuptools.find_packages(),  # list, i.e. [""]
-        "url": rsy.github_base + package_name,
+        "url": rsy.github_base + module_name,
         "license": rsy.license_text,
         "author": rsy.name,
         "author_email": rsy.name,
@@ -121,6 +122,32 @@ def get_module_data(package_name):
         "long_description": rsy.long_descrip,  # str
         "long_description_content_type":
             extension_to_format(rsy.long_descrip_filename.split("setup.py.")[-1]),
+        "python_requires": ">=3.6",  # need python 3.6 or higher for f-strings
+        "classifiers": [
+            # How mature is this project? Common values are
+            #   3 - Alpha
+            #   4 - Beta
+            #   5 - Production/Stable
+            'Development Status :: 3 - Alpha',
+
+            # Indicate who your project is intended for
+            'Intended Audience :: Developers',
+            'Topic :: Software Development :: Build Tools',
+
+            # Pick your license as you wish (should match "license" above)
+            'License :: OSI Approved :: MIT License',
+
+            # Specify the Python versions you support here. In particular, ensure
+            # that you indicate whether you support Python 2, Python 3 or both.
+            'Programming Language :: Python :: 3 :: Only',
+            'Programming Language :: Python :: 3.6',
+            'Programming Language :: Python :: 3.7',
+            'Programming Language :: Python :: 3.8',
+            'Programming Language :: Python :: 3.9',
+            "Environment :: MacOS X"
+            "Natural Language :: English"
+            ],
+
     }
     print(module_data)
     # Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...)
