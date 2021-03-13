@@ -3,12 +3,15 @@
 # To change the permissions of this file so it can be run in terminal, do
 # chmod 755 make_email_images.sh
 
-# To run, cd to the appropriate folder (note- that same folder will be where the image is saved) and run either:
-# ./make_email_images.sh
+# To run, cd to the main project folder and run:
 # ./src/make_email_images.sh
-# depending on which directory you currently are in
+# Alternatively, if change the SAVETOFILENAME to "../docs/email-address-image.png", you can go to the subfolder and do:
+# # ./make_email_images.sh
+#
 
-SAVETOFILENAME=email-address-image.png
+# SAVETOFILENAME can be passed in; otherwise, default value will be used
+SAVETOFILENAME=${1:-"docs/email-address-image.png"}
+# https://linuxhandbook.com/bash-arguments/
 
 echo Saving email addresses as an image. May take a second.
 
