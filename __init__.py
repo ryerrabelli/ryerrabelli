@@ -49,6 +49,6 @@ if __name__ == '__main__':
     pass
     #main()
 
-from ._version import get_versions
+from _version import get_versions
 __version__ = get_versions()['version']
 del get_versions
