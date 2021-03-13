@@ -20,8 +20,9 @@ module_name = "YerrabelliFlask"
 
 
 # Search through all files instead of os.path.exists so it is case insensitive regardless of the file system
-files = [file.lower() for file in os.listdir()] + \
-        [("docs" + os.sep + file.lower()) for file in os.listdir("docs") if os.path.exists("docs")]
+files = [file.lower() for file in os.listdir()]
+if os.path.exists("docs"):
+        files += [("docs" + os.sep + file.lower()) for file in os.listdir("docs")]
 
 
 def get_var_from_file(file_choices,
