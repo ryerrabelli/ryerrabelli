@@ -13,7 +13,7 @@ import os
 import versioneer
 import main
 
-module_data = main.get_module_data(module_name="ryerrabelli")
+module_data = main.get_module_data(package_name="ryerrabelli")
 
 print(module_data)
 # Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...)

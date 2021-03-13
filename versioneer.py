@@ -235,7 +235,7 @@ To upgrade your project to a new release of Versioneer, do the following:
   indicated by the release notes. See [UPGRADING](./UPGRADING.md) for details.
 * re-run `versioneer install` in your source tree, to replace
   `SRC/_version.py`
-* commit any changed files
+* commit any changed filenames
 
 ## Future Directions
 
@@ -1399,7 +1399,7 @@ def render(pieces, style):
 
 
 class VersioneerBadRootError(Exception):
-    """The project root directory is unknown or missing key files."""
+    """The project root directory is unknown or missing key filenames."""
 
 
 def get_versions(verbose=False):
@@ -1708,7 +1708,7 @@ edit setup.cfg, and re-run the installer or 'python versioneer.py setup'.
 SAMPLE_CONFIG = """
 # See the docstring in versioneer.py for instructions. Note that you must
 # re-run 'versioneer.py setup' after changing this section, and commit the
-# resulting files.
+# resulting filenames.
 
 [versioneer]
 #VCS = git
