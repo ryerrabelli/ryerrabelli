@@ -1,6 +1,5 @@
 """
 # Rahul Yerrabelli
-# ryerrabelli@gmail.com
 #
 # Module setup file
 # Originally created following this tutorial on versioning levels:
@@ -9,12 +8,24 @@
 """
 
 import setuptools
-import ryerrabelli.main
 
-module_data = ryerrabelli.main.get_module_data(module_name="ryerrabelli")
+import ryerrabelli as rsy
 
-print(module_data)
-# Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...)
-# Save it as a dict first so we can print it out
-setuptools.setup(**module_data)
 
+def setup():
+
+    ####################################################################################################################
+    # Below line needs to be changed for every different setup.py file
+    module_name = "ryerrabelli"
+    ####################################################################################################################
+
+
+    # Originally, module_data is  outputted as a dict, which makes it easier for printing
+    module_data = rsy.get_module_data(module_name=module_name)
+    # Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...), which is
+    # what setuptools.setup(.) requires
+    print(module_data)
+    setuptools.setup(**module_data)
+
+if __name__ == '__main__':
+    setup()

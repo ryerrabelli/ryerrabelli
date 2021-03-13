@@ -1,2 +1,5 @@
+include docs/README.md
+include docs/LICENSE.txt
+include requirements.txt
 include versioneer.py
-include _version.py
+include src/ryerrabelli/_version.py

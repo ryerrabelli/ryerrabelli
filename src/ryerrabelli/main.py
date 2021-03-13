@@ -6,10 +6,9 @@
 import setuptools
 import os
 
-from ryerrabelli import versioneer
+import versioneer
 
 import ryerrabelli as rsy
-
 
 if __name__ == "__main__":
     from _version import get_versions
