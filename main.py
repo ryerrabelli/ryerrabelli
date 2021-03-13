@@ -12,7 +12,7 @@ import utils
 import ryerrabelli as rsy
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from _version import get_versions
     __version__ = get_versions()['version']
     del get_versions

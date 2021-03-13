@@ -3,7 +3,7 @@ last_name = "Yerrabelli"
 middle_initial = "S"
 name = first_name + last_name
 emails = {}
-emails["gmail"] = default_email = email = gmail = "ryerrabelli@gmail.com"
+emails["gmail"] = default_email = email = gmail = "ryerrabelli+python@gmail.com"
 username = handle = "ryerrabelli"
 github_base = ""
 
