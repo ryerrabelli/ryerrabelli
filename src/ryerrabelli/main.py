@@ -122,11 +122,12 @@ def get_module_data(module_name, extra_module_data=None, force=False):
         "name": module_name,
         "version": versioneer.get_version(),  # str that includes git commit id per PEP format
         "cmdclass": versioneer.get_cmdclass(),
+        "package_dir": {"": "src"},  # ensures that modules don't have to be referenced from src. first
         "packages": setuptools.find_packages(),  # list, i.e. [""]
         "url": rsy.github_base + module_name,
         "license": rsy.license_text,
         "author": rsy.name,
-        "author_email": rsy.name,
+        "author_email": rsy.email,
         "description": "",
         "install_requires": rsy.requirements,  # list of str
         "long_description": rsy.long_descrip,  # str
@@ -159,7 +160,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
             ],
 
     }
-    assert force or not any([extra_key in standard_module_data.keys() for extra_keykey in extra_module_data.keys()]), f"force or not any([extra_key in standard_module_data.keys() for extra_keykey in extra_module_data.keys()]) is wrong for standard_module_data={standard_module_data}, extra_module_data={extra_module_data}, force={force}"
+    assert force or not any([extra_key in standard_module_data.keys() for extra_key in extra_module_data.keys()]), f"force or not any([extra_key in standard_module_data.keys() for extra_keykey in extra_module_data.keys()]) is wrong for standard_module_data={standard_module_data}, extra_module_data={extra_module_data}, force={force}"
 
     combined_modula_data = combine_two(standard_module_data, extra_module_data, default=extra_module_data)
 

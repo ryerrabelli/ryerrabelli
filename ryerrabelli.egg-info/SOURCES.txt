@@ -1,10 +1,13 @@
 MANIFEST.in
-_version.py
+requirements.txt
 setup.cfg
 setup.py
 versioneer.py
+docs/LICENSE.txt
+docs/README.md
 ryerrabelli.egg-info/PKG-INFO
 ryerrabelli.egg-info/SOURCES.txt
 ryerrabelli.egg-info/dependency_links.txt
 ryerrabelli.egg-info/requires.txt
 ryerrabelli.egg-info/top_level.txt
+src/ryerrabelli/_version.py
