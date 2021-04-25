@@ -18,11 +18,7 @@ except ImportError as e:
     from . import utils as rsy
 
 
-if __name__ == "__main__":
-    from _version import get_versions
-    __version__ = get_versions()['version']
-    del get_versions
-    print(f"__version__ = {__version__}")
+
 
 
 def get_var_from_file(file_choices,
@@ -86,7 +82,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
     """
     if extra_module_data is None:
         extra_module_data = {}
-    # Definiton of rsy.f has to come before other definitions bc other ones rely on it
+    # Definiton of rsy.filenames has to come before other definitions bc other ones rely on it
     if rsy.filenames is None:
         rsy.filenames = [file.lower() for file in os.listdir()]
         if os.path.exists("docs"):
