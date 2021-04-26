@@ -690,8 +690,8 @@ def git_pieces_from_vcs(tag_prefix, root, verbose, run_command=run_command):
         full_tag = mo.group(1)
         if not full_tag.startswith(tag_prefix):
             if verbose:
-                fmt = "tag '%%s' doesn't start with prefix '%%s'"
-                print(fmt %% (full_tag, tag_prefix))
+                time_fmt = "tag '%%s' doesn't start with prefix '%%s'"
+                print(time_fmt %% (full_tag, tag_prefix))
             pieces["error"] = ("tag '%%s' doesn't start with prefix '%%s'"
                                %% (full_tag, tag_prefix))
             return pieces
