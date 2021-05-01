@@ -1,83 +1,69 @@
-from functools import wraps
-import time
+"""This module has internal functions/classes that are not useful to access from outside this ryerrabelli module,
+but are used by functions within the ryerrabelli module. """
 
-# All the below variables are defined so they are accessible from the ryerrabelli module
-first_name = "Rahul"
-last_name = "Yerrabelli"
-middle_initial = "S"
-name = first_name + last_name
-emails = {}
-emails["gmail"] = default_email = email = gmail = "ryerrabelli+python@gmail.com"
-username = handle = "ryerrabelli"
-github_base = "https://github.com/ryerrabelli/"
-
-long_descrip = None
-long_descrip_filename = None
-requirements = None
-license_text = None
-
-filenames = None
+import sys
+import os
+from io import StringIO
 
 
+def set_implicit_wait(driver, wait_sec=20):  # seconds
+    pass
+    driver.implicitly_wait(wait_sec)
 
-def analyze_function(print_args: bool = True, time_fmt: str = "0.4f", do: bool =True, is_command: bool = True):
-    """This is a decorator function used to nicely time functions as well as print out their inputs.
-    # https://stackoverflow.com/questions/52214720/whether-the-return-value-of-a-function-modified-by-python-decorator-can-only-be
-    # https://www.geeksforgeeks.org/decorator-to-print-function-call-details-in-python/
-    The arguments to the outer "analyze_function(.)" function are arguments to the decorator (like @analyze_function(do=False) )
-    :param print_args:
-    :type print_args: bool
-    :param time_fmt: format of time
-    :type time_fmt: str
-    :param do: Making this false is the same as not calling this function. Having it as a variable makes the syntax sometimes easier.
-    :type do: bool
-    :param is_command: The is_commands variable is for functions like "run_command(commands, args,...)" where commands=["git"] and args=["describe","--tags"] so that the output into bash/zsh is like "git describe --tags"
-    :type is_command: bool
+
+def enable_printing() -> None:
+    """
+    Reference: https://stackoverflow.com/questions/8447185/to-prevent-a-function-from-printing-in-the-batch-console-in-python
     :return:
     :rtype:
     """
+    sys.stdout = sys.__stdout__
 
-    def decorator(func):
-        """
 
-        :param func: The function being wrapped. The "@" syntactic sugar automatically puts this as an argument.
-        :type func: function
-        :return:
-        :rtype:
-        """
-        # Getting the argument names of the called function
-        arg_names = func.__code__.co_varnames[:func.__code__.co_argcount]
+def disable_printing() -> None:
+    """
+    Reference: https://stackoverflow.com/questions/8447185/to-prevent-a-function-from-printing-in-the-batch-console-in-python
+    :return:
+    :rtype:
+    """
+    sys.stdout = open(os.devnull, "w")
 
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            """
 
-            :param args: the positional arguments to the decorated function
-            :type args: list
-            :param kwargs: the named arguments to the decorated function
-            :type kwargs: list
-            :return: same as the decorated function
-            :rtype: same as the decorated function
-            """
-            if not do:
-                return func(*args, **kwargs)
+class Capturing(list):
+    """
+    Reference:
+        https://stackoverflow.com/questions/16571150/how-to-capture-stdout-output-from-a-python-function-call
+    Usage:
+        with Capturing() as output:
+            do_something(my_object)
+        # output is now a list containing the lines printed by the function call.
 
-            if is_command:
-                print(" ".join([" ".join(args[0])] + args[1]))
+        # Can also be done more than once with results outputted
 
-            t0 = time.time()
-            try:
-                return func(*args, **kwargs)
-            finally:  # "finally" runs no matter what - whether error is thrown or not, even if return keyword is given
-                t1 = time.time()
-                # There also is the func.__code__ var, but that is too much to print nicely
-                if print_args:
-                    # print(f"Took {t1 - t0:{time_fmt}} sec to run: {func.__name__}({', '.join('% s = % r' % entry for entry in zip(argnames, args[:len(argnames)]))} ), args = {list(args[len(argnames):])}, kwargs = {kwargs}")
-                    print(f"Took {t1 - t0:{time_fmt}} sec to run: {func.__name__}" +
-                          f"({', '.join('% s=% r' % entry for entry in zip(arg_names, args[:len(arg_names)]))} ), args = {list(args[len(arg_names):])}, kwargs = {kwargs}")
-                else:
-                    print(f"Took {t1 - t0:{time_fmt}} sec to run '{func.__name__}'")
+    Example:
+        with Capturing() as output:
+            print('hello world')
 
-        return wrapper
+        print('displays on screen')
 
-    return decorator
+        with Capturing(output) as output:  # note the constructor argument
+            print('hello world2')
+
+        print('done')
+        print('output:', output)
+
+    Example Output:
+        displays on screen
+        done
+        output: ['hello world', 'hello world2']
+    """
+    def __enter__(self):
+        self._stdout = sys.stdout
+        sys.stdout = self._stringio = StringIO()
+        return self
+
+    def __exit__(self, *args):
+        self.extend(self._stringio.getvalue().splitlines())
+        del self._stringio    # free up some memory
+        sys.stdout = self._stdout
+

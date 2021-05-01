@@ -18,12 +18,14 @@ Standard information / code to create a python project (specifically a package).
 # ***NOTE: Above message is present in multiple files. Update text in all if comment is changed.
 try:
     from ryerrabelli.main import *
-    from ryerrabelli.utils import *
+    from ryerrabelli.constants import *
+    from ryerrabelli.decorators import *
 except ImportError as e:
     #import src.ryerrabelli as ryerrabelli
     #from . import main
-    from .main import *
-    from .utils import *
+    from .packaging import *
+    from .constants import *
+    from .decorators import *
 
 
 from ._version import get_versions

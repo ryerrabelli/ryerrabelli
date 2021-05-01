@@ -15,7 +15,7 @@ import versioneer
 try:
     import ryerrabelli as rsy
 except ImportError as e:
-    from . import utils as rsy
+    from . import constants as rsy
 
 
 
