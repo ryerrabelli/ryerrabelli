@@ -114,6 +114,7 @@ def display_unittest_as_formatted(f):
                     to_return = f(*args, **kwargs)
                 for output in outputs:
                     #print("\t", output)
+                    pass
                     print(to_print_right, output)
             else:
                 to_return = f(*args, **kwargs)
@@ -126,7 +127,7 @@ def display_unittest_as_formatted(f):
             else:
                 #print("Result: \tNo error! Returned: \t", to_return)
                 print(align("Result", "No error!"))
-                print(align("Returned", to_return))
+                #print(align("Returned", to_return))
 
             print()
             print("##############################")
