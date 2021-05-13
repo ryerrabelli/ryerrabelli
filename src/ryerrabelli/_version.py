@@ -66,8 +66,8 @@ def register_vcs_handler(vcs, method):  # decorator
         return f
     return decorate
 
-import ryerrabelli as rsy
-@rsy.analyze_function(do=False)
+#import ryerrabelli as rsy
+#@rsy.analyze_function(do=False)
 def run_command(commands, args, cwd=None, verbose=False, hide_stderr=False,
                 env=None):
     """Call the given command(s)."""
