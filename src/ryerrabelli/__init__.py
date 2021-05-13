@@ -17,15 +17,15 @@ Standard information / code to create a python project (specifically a package).
 # any functions in utils.py) and main.py only needs to import functions from util.py
 # ***NOTE: Above message is present in multiple files. Update text in all if comment is changed.
 try:
-    from ryerrabelli.main import *
+    from ryerrabelli.packaging import *
     from ryerrabelli.constants import *
     from ryerrabelli.decorators import *
+    # ryerrabelli.utils is not meant to be imported too - meant to have internal files only
 except ImportError as e:
-    #import src.ryerrabelli as ryerrabelli
-    #from . import main
     from .packaging import *
     from .constants import *
     from .decorators import *
+    # .utils is not meant to be imported too - meant to have internal files only
 
 
 from ._version import get_versions

@@ -22,7 +22,7 @@ import setuptools
 try:
     import ryerrabelli as rsy
 except ImportError as e:
-    import src.ryerrabelli.main as rsy
+    import src.ryerrabelli.packaging as rsy
 
 
 def setup():
@@ -39,6 +39,7 @@ def setup():
     # what setuptools.setup(.) requires
     print(module_data)
     setuptools.setup(**module_data)
+
 
 if __name__ == '__main__':
     setup()
