@@ -28,7 +28,7 @@ export DESCRIBE=$(git describe --always --tags --long --first-parent)   # return
 export DISTANCE=$(echo $DESCRIBE | cut -d "-" -f 2)
 export VERSION=$(echo $DESCRIBE | cut -d "-" -f 1)  # returns something like 1.0.4
 #export VERSION=$(git describe --always --tags --first-parent)  # returns something like 1.0.4
-if [ $DISTANCE -eq 0 ]; then
+if [ "$DISTANCE" -eq 0 ]; then
   echo No need to bump up version;
 else
   pip install semver==2.13.0;  # does not need to be a package requirement as only needed when bumping up the version
@@ -38,7 +38,7 @@ else
   # You should do this again if you change the code/add tags/etc so it can update.
 fi
 
-
+if [ $DISTANCE -eq 0 ]; then echo No need to bump up version; else echo Bumping up version from $VERSION; fi;
 
 
 echo Doing setup.py install
