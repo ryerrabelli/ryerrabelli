@@ -7,6 +7,8 @@
 # ./scripts/upload_to_pypi.sh
 # PyPI token credentials should be saved to $HOME/.pypirc
 # The username will be __token__. Password will be a long case-sensitive alphanumeric string starting with pypi-
+# twine should also aleady be installed i.e. by
+# $ pip install twine
 #
 
 echo Uploading to pypi
