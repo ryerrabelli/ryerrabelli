@@ -35,7 +35,7 @@ echo Doing setup.py install
 python setup.py install
 
 #python -m pip install --upgrade build
-python -m build
+python -m build src/
 
 echo Uploading to pypi/testpypi
 
