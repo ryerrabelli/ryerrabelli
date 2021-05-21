@@ -17,6 +17,7 @@ echo Uploading to pypi
 # Then make sure you have an egg file and a dist folder.
 # To get this, run
 # python setup.py install
+PYTHONPATH="src" python -m ryerrabelli.__init__
 # You should do this again if you change the code/add tags/etc so it can update.
 #python3 -m twine upload --repository testpypi dist/*
 #python -m twine upload dist/*
