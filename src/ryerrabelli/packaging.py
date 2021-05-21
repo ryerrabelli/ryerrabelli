@@ -153,7 +153,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
             'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9',
-            "Environment :: MacOS X"
+            "Environment :: MacOS X",
             "Natural Language :: English"
             ],
 
