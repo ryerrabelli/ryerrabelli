@@ -5,7 +5,7 @@
 
 # To run, cd to the main project folder and run:
 # ./scripts/upload_to_pypi.sh
-# PyPI token credentials should be saved to $HOME/.pypirc
+# PyPI token credentials should be saved to $HOME/.pypirc in order to not have to type in the username and password
 # The username will be __token__. Password will be a long case-sensitive alphanumeric string starting with pypi-
 # twine should also aleady be installed i.e. by
 # $ pip install twine
@@ -17,9 +17,11 @@ echo Uploading to pypi
 # Then make sure you have an egg file and a dist folder.
 # To get this, run
 # python setup.py install
-PYTHONPATH="src" python -m ryerrabelli.__init__
+git commit -a --message "test commit by terminal"
+python setup.py install
+#PYTHONPATH="src" python -m ryerrabelli.__init__
 # You should do this again if you change the code/add tags/etc so it can update.
-#python3 -m twine upload --repository testpypi dist/*
+#python -m twine upload --repository testpypi dist/*
 #python -m twine upload dist/*
 
 
