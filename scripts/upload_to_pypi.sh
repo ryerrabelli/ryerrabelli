@@ -32,6 +32,7 @@ git tag -a "$VERSION" -m "Release v. $VERSION"
 # You should do this again if you change the code/add tags/etc so it can update.
 
 echo Doing setup.py install
+# Get list of commands by python setup.py --help-commands
 #python setup.py install
 python setup.py sdist
 python setup.py bdist_wheel
