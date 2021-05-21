@@ -43,11 +43,11 @@ fi
 
 echo Running setup.py
 # Get list of commands by python setup.py --help-commands
-python setup.py bdist_egg
-python setup.py bdist
-python setup.py bdist_wheel
-#python setup.py sdist --dist-dir="dist/"   # sdist is a source distribution, so it allows the code to be installed in almost any platform (including my own mac)
-#python setup.py install
+python setup.py bdist bdist_egg bdist_wheel
+#python setup.py bdist_egg
+#python setup.py bdist
+#python setup.py bdist_wheel   # This one allows install on mac
+#python setup.py sdist --dist-dir="dist/"   # sdist is a source distribution, so it allows the code to be installed in almost any platform (including my own mac) -> however, for some reason, is throwing an error when using it
 
 #python -m pip install --upgrade build
 #python -m build src/ --outdir dist/
