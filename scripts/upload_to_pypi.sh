@@ -28,7 +28,7 @@ export DESCRIBE=$(git describe --always --tags --long --first-parent)   # return
 export DISTANCE=$(echo $DESCRIBE | cut -d "-" -f 2)
 export VERSION=$(echo $DESCRIBE | cut -d "-" -f 1)  # returns something like 1.0.4
 #export VERSION=$(git describe --always --tags --first-parent)  # returns something like 1.0.4
-if [ $DISTANCE -eq 1 ]; then
+if [ $DISTANCE -eq 0 ]; then
   pip install semver==2.13.0;  # does not need to be a package requirement as only needed when bumping up the version
   export VERSION=$(pysemver bump patch $VERSION).   # pysemver bumps  up the version number and tags it (unlike versioneer, which just adds the commits since the last tag)
   echo Bumping up version to $VERSION;
