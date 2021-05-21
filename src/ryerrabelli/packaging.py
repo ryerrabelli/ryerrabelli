@@ -126,7 +126,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
         "license": rsy.license_text,
         "author": rsy.name,
         "author_email": rsy.email,
-        "description": "",
+        "description": "Not written yet.",
         "install_requires": rsy.requirements,  # list of str
         "long_description": rsy.long_descrip,  # str
         "long_description_content_type":
