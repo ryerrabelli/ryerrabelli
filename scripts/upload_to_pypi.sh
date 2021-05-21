@@ -16,15 +16,18 @@
 # Then make sure you have an egg file and a dist folder.
 # To get this, run
 # python setup.py install
+echo Committing
 git commit -a --message "test commit by terminal"
+echo Doing setup.py install
 python setup.py install
 
+echo Getting and bumping up the version
 # First two options return returns 1.0.4+3.ge1ca766.dirty
 #python -c "import versioneer; print(versioneer.get_version()"
 #PYTHONPATH="src" python -m ryerrabelli.__init__   # relies on calling of the module to return versioneer version (I added it to the init__ file)
 export DESCRIBE=$(git describe --always --tags --long --first-parent)   # returns something like 1.0.4-3-ge1ca766 <- will not include the .dirty extension
 export VERSION=$(echo $DESCRIBE | cut -d "-" -f 1)  # returns something like 1.0.4
-pip install semver==2.13.0
+pip install semver==2.13.0  # does not need to be a package requirement as only needed when bumping up the version
 export VERSION=$(pysemver bump patch $VERSION)
 git tag -a "$VERSION" -m "Release v. $VERSION"
 # You should do this again if you change the code/add tags/etc so it can update.
