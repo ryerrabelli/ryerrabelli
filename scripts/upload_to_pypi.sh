@@ -39,13 +39,12 @@ else
   # You should do this again if you change the code/add tags/etc so it can update.
 fi
 
-if [ $DISTANCE -eq 0 ]; then echo No need to bump up version; else echo Bumping up version from $VERSION; fi;
 
 
 echo Running setup.py
 # Get list of commands by python setup.py --help-commands
 python setup.py bdist_egg
-python setup.py sdist   # sdist is a source distribution
+python setup.py sdist --dist-dir="dist/"   # sdist is a source distribution, so it allows the code to be installed in almost any platform (including my own mac)
 #python setup.py install
 #python setup.py bdist_wheel
 
