@@ -27,6 +27,7 @@ echo Getting and possibly bumping up the version
 export DESCRIBE=$(git describe --always --tags --long --first-parent)   # returns something like 1.0.4-3-ge1ca766 <- will not include the .dirty extension
 export DISTANCE=$(echo $DESCRIBE | cut -d "-" -f 2)
 export VERSION=$(echo $DESCRIBE | cut -d "-" -f 1)  # returns something like 1.0.4
+echo DESCRIBE=$DESCRIBE, DISTANCE=$DISTANCE, VERSION=$VERSION
 #export VERSION=$(git describe --always --tags --first-parent)  # returns something like 1.0.4
 if [ "$DISTANCE" -eq 0 ]; then
   echo No need to bump up version;
