@@ -31,6 +31,7 @@ export VERSION=$(pysemver bump patch $VERSION)   # pysemver bumps  up the versio
 git tag -a "$VERSION" -m "Release v. $VERSION"
 # You should do this again if you change the code/add tags/etc so it can update.
 
+
 echo Doing setup.py install
 # Get list of commands by python setup.py --help-commands
 python setup.py bdist_egg
