@@ -18,8 +18,6 @@
 # python setup.py install
 echo Committing
 git commit -a --message "test commit by terminal"
-echo Doing setup.py install
-python setup.py install
 
 echo Getting and bumping up the version
 # First two options return returns 1.0.4+3.ge1ca766.dirty
@@ -32,10 +30,13 @@ export VERSION=$(pysemver bump patch $VERSION)
 git tag -a "$VERSION" -m "Release v. $VERSION"
 # You should do this again if you change the code/add tags/etc so it can update.
 
+echo Doing setup.py install
+python setup.py install
 
 echo Uploading to pypi/testpypi
 
-python -m twine upload --repository testpypi dist/*
+python -m twine upload --repository testpypi dist/ryerrabelli-$VERSION*
+#python -m twine upload --repository testpypi dist/*
 #python -m twine upload dist/*
 
 echo Done uploading to pypi/testpypi.
