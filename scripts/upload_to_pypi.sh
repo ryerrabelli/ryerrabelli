@@ -32,16 +32,18 @@ git tag -a "$VERSION" -m "Release v. $VERSION"
 # You should do this again if you change the code/add tags/etc so it can update.
 
 echo Doing setup.py install
-python setup.py install
+#python setup.py install
+python setup.py sdist
+python setup.py bdist_wheel
 
 #python -m pip install --upgrade build
-python -m build src/ --outdir dist/
+#python -m build src/ --outdir dist/
 
 echo Uploading to pypi/testpypi
 
-#python -m twine upload --repository testpypi dist/ryerrabelli-$VERSION*
+python -m twine upload --repository testpypi dist/ryerrabelli-$VERSION*
 #python -m twine upload --repository testpypi dist/*
-python -m twine upload dist/ryerrabelli-$VERSION*
+#python -m twine upload dist/ryerrabelli-$VERSION*
 #python -m twine upload dist/*
 
 echo Done

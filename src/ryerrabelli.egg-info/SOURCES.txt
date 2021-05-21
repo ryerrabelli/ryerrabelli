@@ -9,12 +9,7 @@ docs/README.md
 docs/email-address-image.png
 docs/markdown-cheat-sheet.md
 src/make_email_images.sh
-src/UNKNOWN.egg-info/PKG-INFO
-src/UNKNOWN.egg-info/SOURCES.txt
-src/UNKNOWN.egg-info/dependency_links.txt
-src/UNKNOWN.egg-info/top_level.txt
 src/dist/UNKNOWN-0.0.0-py3-none-any.whl
-src/dist/UNKNOWN-0.0.0.tar.gz
 src/ryerrabelli/__init__.py
 src/ryerrabelli/_version.py
 src/ryerrabelli/constants.py
