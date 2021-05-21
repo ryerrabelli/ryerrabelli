@@ -19,7 +19,7 @@ echo Uploading to pypi
 # python setup.py install
 # You should do this again if you change the code/add tags/etc so it can update.
 #python3 -m twine upload --repository testpypi dist/*
-python -m twine upload dist/*
+#python -m twine upload dist/*
 
 
 echo Done.

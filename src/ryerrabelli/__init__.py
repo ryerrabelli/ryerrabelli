@@ -33,5 +33,13 @@ __version__ = get_versions()['version']
 del get_versions
 
 
-
-
+if __name__ == '__main__':
+    # 'Module is being executed directly, so do stuff here')
+    # https://stackoverflow.com/questions/46319694/what-does-it-mean-to-run-library-module-as-a-script-with-the-m-option
+    # Can be run by doing the following in terminal
+    # $ python -m ryerrabelli
+    # $ python -m src.ryerrabelli.__init__  # __init__ needs to be specified, otherwise will try to find a __main__ file
+    # $ python -c "import src.ryerrabelli"
+    # $ PYTHONPATH="src" python -c "import ryerrabelli" # Python path changed only for one line
+    # $ PYTHONPATH="src" python -m ryerrabelli   # Python path changed only for one line
+    print(__version__)
