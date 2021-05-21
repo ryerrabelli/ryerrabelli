@@ -111,7 +111,6 @@ def get_module_data(module_name, extra_module_data=None, force=False):
                                 default=("", None),
                                 )
 
-    rsy.long_descrip = "Not yet written."
 
     # For details on how to document, see:
     # https://packaging.python.org/guides/distributing-packages-using-setuptools/#setup-py
@@ -126,7 +125,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
         "license": rsy.license_text,
         "author": rsy.name,
         "author_email": rsy.email,
-        "description": "Not written yet.",
+        "description": "See long description",
         "install_requires": rsy.requirements,  # list of str
         "long_description": rsy.long_descrip,  # str
         "long_description_content_type":
