@@ -33,6 +33,9 @@ git tag -a "$VERSION" -m "Release v. $VERSION"
 echo Doing setup.py install
 python setup.py install
 
+#python -m pip install --upgrade build
+python -m build
+
 echo Uploading to pypi/testpypi
 
 #python -m twine upload --repository testpypi dist/ryerrabelli-$VERSION*
