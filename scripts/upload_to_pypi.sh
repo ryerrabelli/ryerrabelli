@@ -44,7 +44,8 @@ fi
 echo Running setup.py
 # Get list of commands by python setup.py --help-commands
 python setup.py bdist_egg
-python setup.py sdist --dist-dir="dist/"   # sdist is a source distribution, so it allows the code to be installed in almost any platform (including my own mac)
+python setup.py bdist
+#python setup.py sdist --dist-dir="dist/"   # sdist is a source distribution, so it allows the code to be installed in almost any platform (including my own mac)
 #python setup.py install
 #python setup.py bdist_wheel
 
