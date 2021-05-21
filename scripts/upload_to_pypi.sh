@@ -11,7 +11,6 @@
 # $ pip install twine
 #
 
-echo Uploading to pypi
 
 # First make sure that the latest version of the code is committed (not dirty) and tagged.
 # Then make sure you have an egg file and a dist folder.
@@ -19,10 +18,21 @@ echo Uploading to pypi
 # python setup.py install
 git commit -a --message "test commit by terminal"
 python setup.py install
-#PYTHONPATH="src" python -m ryerrabelli.__init__
+
+# First two options return returns 1.0.4+3.ge1ca766.dirty
+#python -c "import versioneer; print(versioneer.get_version()"
+#PYTHONPATH="src" python -m ryerrabelli.__init__   # relies on calling of the module to return versioneer version (I added it to the init__ file)
+export DESCRIBE=$(git describe --always --tags --long --first-parent)   # returns something like 1.0.4-3-ge1ca766 <- will not include the .dirty extension
+export VERSION=$(echo $DESCRIBE | cut -d "-" -f 1)  # returns something like 1.0.4
+pip install semver==2.13.0
+export VERSION=$(pysemver bump patch $VERSION)
+git tag -a "$VERSION" -m "Release v. $VERSION"
 # You should do this again if you change the code/add tags/etc so it can update.
-#python -m twine upload --repository testpypi dist/*
+
+
+echo Uploading to pypi/testpypi
+
+python -m twine upload --repository testpypi dist/*
 #python -m twine upload dist/*
 
-
-echo Done.
+echo Done uploading to pypi/testpypi.
