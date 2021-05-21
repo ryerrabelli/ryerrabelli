@@ -56,7 +56,7 @@ echo Uploading to pypi/testpypi
 
 #python -m twine upload --repository testpypi dist/ryerrabelli-$VERSION*
 #python -m twine upload --repository testpypi dist/*
-#python -m twine upload dist/ryerrabelli-$VERSION*
+python -m twine upload dist/ryerrabelli-$VERSION*
 #python -m twine upload dist/*
 
 echo Done
