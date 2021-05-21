@@ -111,6 +111,8 @@ def get_module_data(module_name, extra_module_data=None, force=False):
                                 default=("", None),
                                 )
 
+    rsy.long_descrip = "Not yet written."
+
     # For details on how to document, see:
     # https://packaging.python.org/guides/distributing-packages-using-setuptools/#setup-py
     # Calls to versioneer are not to get versions of the ryerrabelli package, but to get the version of the original package.
