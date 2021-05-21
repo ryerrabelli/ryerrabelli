@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e  # causes program to stop midway if one of the steps had an error
 # To change the permissions of this file so it can be run in terminal, do
 # chmod 755 upload_to_pypi.sh
 
@@ -17,8 +16,9 @@ set -e  # causes program to stop midway if one of the steps had an error
 # To get this, run
 # python setup.py install
 echo Committing
-git commit -a --message "test commit by terminal"
+git commit -a --message "Committing by terminal in preparation for upload to PyPI and/or TestPyPI"
 
+set -e  # causes program to stop midway if one of the steps had an error
 
 echo Getting and possibly bumping up the version
 # First two options return returns 1.0.4+3.ge1ca766.dirty
