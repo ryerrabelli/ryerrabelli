@@ -21,7 +21,7 @@ git commit -a --message "test commit by terminal"
 
 echo Getting and bumping up the version
 # First two options return returns 1.0.4+3.ge1ca766.dirty
-#python -c "import versioneer; print(versioneer.get_version()"
+#python -c "import versioneer; print(versioneer.get_version())"
 #PYTHONPATH="src" python -m ryerrabelli.__init__   # relies on calling of the module to return versioneer version (I added it to the init__ file)
 #export DESCRIBE=$(git describe --always --tags --long --first-parent)   # returns something like 1.0.4-3-ge1ca766 <- will not include the .dirty extension
 #export VERSION=$(echo $DESCRIBE | cut -d "-" -f 1)  # returns something like 1.0.4
@@ -35,7 +35,7 @@ echo Doing setup.py install
 # Get list of commands by python setup.py --help-commands
 #python setup.py install
 python setup.py sdist
-python setup.py bdist_wheel
+#python setup.py bdist_wheel
 
 #python -m pip install --upgrade build
 #python -m build src/ --outdir dist/
