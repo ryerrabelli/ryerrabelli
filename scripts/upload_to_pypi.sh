@@ -42,7 +42,7 @@ fi
 if [ $DISTANCE -eq 0 ]; then echo No need to bump up version; else echo Bumping up version from $VERSION; fi;
 
 
-echo Doing setup.py install
+echo Running setup.py
 # Get list of commands by python setup.py --help-commands
 python setup.py bdist_egg
 #python setup.py install
