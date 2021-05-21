@@ -13,9 +13,13 @@
 
 echo Uploading to pypi
 
-# first make sure you have an egg file and a dist folder. To get this, run setup.py install
+# First make sure that the latest version of the code is committed (not dirty) and tagged.
+# Then make sure you have an egg file and a dist folder.
+# To get this, run setup.py install
+# You should do this again if you change the code/add tags/etc so it can update.
 #python3 -m twine upload --repository testpypi dist/*
-python3 -m twine upload dist/*
+python setup.py install
+python -m twine upload dist/*
 
 
 echo Done.
