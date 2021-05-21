@@ -34,10 +34,11 @@ def setup():
 
 
     # Originally, module_data is  outputted as a dict, which makes it easier for printing
-    module_data = rsy.get_module_data(module_name=module_name)
+    module_data = rsy.get_module_data(module_name=module_name, long_descripa="")
     # Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...), which is
     # what setuptools.setup(.) requires
     print(module_data)
+    rsy.long_descrip = "To be done."
     setuptools.setup(**module_data)
 
 
