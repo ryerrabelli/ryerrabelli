@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -e  # causes program to stop midway if one of the steps had an error
 # To change the permissions of this file so it can be run in terminal, do
 # chmod 755 upload_to_pypi.sh
 
@@ -45,8 +45,8 @@ if [ $DISTANCE -eq 0 ]; then echo No need to bump up version; else echo Bumping 
 echo Running setup.py
 # Get list of commands by python setup.py --help-commands
 python setup.py bdist_egg
+python setup.py sdist   # sdist is a source distribution
 #python setup.py install
-#python setup.py sdist
 #python setup.py bdist_wheel
 
 #python -m pip install --upgrade build
@@ -56,7 +56,9 @@ echo Uploading to pypi/testpypi
 
 #python -m twine upload --repository testpypi dist/ryerrabelli-$VERSION*
 #python -m twine upload --repository testpypi dist/*
-python -m twine upload dist/ryerrabelli-$VERSION*
+#python -m twine upload dist/ryerrabelli-$VERSION*
 #python -m twine upload dist/*
 
 echo Done
+
+#python3 -m pip install --index-url https://test.pypi.org/simple/ --no-deps ryerrabelli
