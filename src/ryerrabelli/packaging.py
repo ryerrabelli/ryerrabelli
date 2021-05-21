@@ -121,10 +121,10 @@ def get_module_data(module_name, extra_module_data=None, force=False):
         "cmdclass": versioneer.get_cmdclass(),
         "package_dir": {"": "src"},  # ensures that modules don't have to be referenced from src. first
         "packages": setuptools.find_packages(),  # list, i.e. [""]
-        "url": rsy.github_base + module_name,
+        "url": rsy.GITHUB_BASE + module_name,
         "license": rsy.license_text,
-        "author": rsy.name,
-        "author_email": rsy.email,
+        "author": rsy.NAME,
+        "author_email": rsy.EMAIL,
         "description": "See long description",
         "install_requires": rsy.requirements,  # list of str
         "long_description": rsy.long_descrip,  # str

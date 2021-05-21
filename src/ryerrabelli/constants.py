@@ -8,14 +8,16 @@ from typing import List, Set, Dict, Tuple, Any, Optional, Callable, Iterator, Un
 
 
 # All the below variables are defined so they are accessible from the ryerrabelli module
-first_name = "Rahul"
-last_name = "Yerrabelli"
-middle_initial = "S"
-name = first_name + last_name
-emails = {}
-emails["gmail"] = default_email = email = gmail = "ryerrabelli+python@gmail.com"
-username = handle = "ryerrabelli"
-github_base = "https://github.com/ryerrabelli/"
+# Lowercase versions kept in for compatibility. However, this are meant to be
+# fixed constants (thus style should be capitalized)
+FIRST_NAME = "Rahul"
+LAST_NAME = "Yerrabelli"
+MIDDLE_INITIAL = "S"
+NAME = name = FIRST_NAME + " " + LAST_NAME
+EMAILS = {}
+EMAILS["gmail"] = DEFAULT_EMAIL = EMAIL = GMAIL = "ryerrabelli+python@gmail.com"
+USERNAME = username = HANDLE = "ryerrabelli"
+GITHUB_BASE = "https://github.com/ryerrabelli/"
 
 
 # - The below values are not set yet, but will be set during the running of packaging.py, which should be run when any
