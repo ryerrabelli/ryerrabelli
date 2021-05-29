@@ -1,5 +1,6 @@
 import setuptools
 import os
+import json
 import versioneer
 
 # Actions in "try:" happen when ryerrabelli module is used to set up any module besides ryerrabelli.
@@ -161,10 +162,10 @@ def get_module_data(module_name, extra_module_data=None, force=False):
     }
     assert force or not any([extra_key in standard_module_data.keys() for extra_key in extra_module_data.keys()]), f"force or not any([extra_key in standard_module_data.keys() for extra_keykey in extra_module_data.keys()]) is wrong for standard_module_data={standard_module_data}, extra_module_data={extra_module_data}, force={force}"
 
+
     combined_modula_data = combine_two(standard_module_data, extra_module_data, default=extra_module_data)
 
     #print(combined_modula_data)
-    import json
     print(json.dumps(combined_modula_data, sort_keys=False, indent=4,
                      default=lambda obj: str(obj)  # default is a function called if object is not one of the serializable types
                      ))

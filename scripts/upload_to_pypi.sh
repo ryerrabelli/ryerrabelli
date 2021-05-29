@@ -15,7 +15,7 @@
 # Then make sure you have an egg file and a dist folder.
 # To get this, run
 # python setup.py install
-echo "Committing"
+echo "Committing project to get a clean version"
 git commit -a --message "Committing by terminal in preparation for upload to PyPI and/or TestPyPI"
 
 set -e  # causes program to stop midway if one of the steps had an error
@@ -32,7 +32,7 @@ echo "Getting and possibly bumping up the version"
 export DESCRIBE=$(git describe --always --tags --long --first-parent)   # returns something like 1.0.4-3-ge1ca766 <- will not include the .dirty extension
 export DISTANCE=$(echo "$DESCRIBE" | cut -d "-" -f 2)
 export VERSION=$(echo "$DESCRIBE" | cut -d "-" -f 1)  # returns something like 1.0.4
-echo DESCRIBE="$DESCRIBE", DISTANCE="$DISTANCE", VERSION="$VERSION"
+echo PROJECT_NAME="PROJECT_NAME", DESCRIBE="$DESCRIBE", DISTANCE="$DISTANCE", VERSION="$VERSION"
 #export VERSION=$(git describe --always --tags --first-parent)  # returns something like 1.0.4
 if [ "$DISTANCE" -eq 0 ]; then
   echo No need to bump up version;
@@ -49,8 +49,8 @@ fi
 echo "Running setup.py"
 # Get list of commands by:
 # python setup.py --help-commands
-#python setup.py bdist bdist_egg bdist_wheel
-python setup.py bdist
+python setup.py bdist bdist_egg bdist_wheel
+#python setup.py bdist
 #python setup.py bdist_egg
 #python setup.py bdist_wheel   # This one allows install on mac
 #python setup.py sdist --dist-dir="dist/"   # sdist is a source distribution, so it allows the code to be installed in almost any platform (including my own mac) -> however, for some reason, is throwing an error when using it
@@ -58,7 +58,8 @@ python setup.py bdist
 #python -m pip install --upgrade build
 #python -m build src/ --outdir dist/
 
-echo "Uploading to pypi/testpypi"
+
+echo "Uploading to pypi and/or testpypi"
 
 python -m twine upload --repository testpypi "dist/$PROJECT_NAME-$VERSION*"
 #python -m twine upload --repository testpypi "dist/*"
