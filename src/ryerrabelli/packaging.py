@@ -158,7 +158,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
             "Environment :: MacOS X",
             "Natural Language :: English"
             ],
-
+        "include_package_data": True,
     }
     assert force or not any([extra_key in standard_module_data.keys() for extra_key in extra_module_data.keys()]), f"force or not any([extra_key in standard_module_data.keys() for extra_keykey in extra_module_data.keys()]) is wrong for standard_module_data={standard_module_data}, extra_module_data={extra_module_data}, force={force}"
 
