@@ -165,7 +165,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
 
     #print(combined_modula_data)
     import json
-    print(json.dumps(combined_modula_data, sort_keys=False, indent=4))
+    print(json.dumps(combined_modula_data, sort_keys=False, indent=4, default=lambda obj: str(obj) ))
 
     # Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...)
     # Save it as a dict first so we can print it out
