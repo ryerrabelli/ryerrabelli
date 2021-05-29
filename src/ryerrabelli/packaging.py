@@ -100,7 +100,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
     if rsy.requirements is None:
         rsy.requirements, _ \
             = get_var_from_file(["requirements", "requirements.txt"],
-                                lambda file: [line.strip() for line in file],  # Get list of (str) requirements
+                                lambda file: [line.strip() for line in file if not line.startswith("#")],  # Get list of (str) requirements, removing lines starting with # aka comments (Note- partial line comments are kept for now for ease)
                                 default=([], None),
                                 )
     if rsy.license_text is None:
@@ -122,7 +122,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
         "package_dir": {
             "": "src"  # ensures that modules don't have to be referenced from src. first
         },
-        "packages": setuptools.find_packages(),  # list, i.e. [""]
+        "packages": setuptools.find_packages(where="src"),  # list, i.e. [""]
         "url": rsy.GITHUB_BASE + module_name,
         #"license": rsy.license_text,
         "author": rsy.NAME,
@@ -165,7 +165,9 @@ def get_module_data(module_name, extra_module_data=None, force=False):
 
     #print(combined_modula_data)
     import json
-    print(json.dumps(combined_modula_data, sort_keys=False, indent=4, default=lambda obj: str(obj) ))
+    print(json.dumps(combined_modula_data, sort_keys=False, indent=4,
+                     default=lambda obj: str(obj)  # default is a function called if object is not one of the serializable types
+                     ))
 
     # Operator "**" unpacks dict into named arguments i.e. setup(name=x,version=y, cmdclass=z,...)
     # Save it as a dict first so we can print it out
