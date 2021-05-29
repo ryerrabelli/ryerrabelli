@@ -59,12 +59,23 @@ python setup.py bdist bdist_egg bdist_wheel
 #python -m build src/ --outdir dist/
 
 
-echo "Uploading to pypi and/or testpypi"
 
-python -m twine upload --repository testpypi "dist/$PROJECT_NAME-$VERSION*"
-#python -m twine upload --repository testpypi "dist/*"
-#python -m twine upload "dist/ryerrabelli-$VERSION*"
-#python -m twine upload "dist/*"
+if [ "$#" -eq  "0" ]; then  # If there are no input arguments
+  echo "No arguments supplied. Will set upload location to repository system testpypi"
+  export UPLOAD_TO="testpypi"
+  #python -m twine upload --repository testpypi "dist/$PROJECT_NAME-$VERSION*"
+else
+  export UPLOAD_TO="$1"   # Set equal to first input argument
+fi
+
+if [ "$1" = "pypi" ]; then
+  echo "Uploading to repository system pypi"
+  python -m twine upload "dist/ryerrabelli-$VERSION*"
+else
+  echo "Uploading to repository system $UPLOAD_TO"
+  python -m twine upload --repository "$UPLOAD_TO" "dist/$PROJECT_NAME-$VERSION*"
+fi
+
 
 echo "Done uploading."
 
