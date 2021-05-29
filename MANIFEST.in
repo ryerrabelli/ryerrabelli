@@ -4,7 +4,7 @@ include docs/README.md
 include docs/LICENSE.txt
 include requirements.txt
 include versioneer.py
-include src/ryerrabelli/_version.py
+include ryerrabelli/_version.py
 
 graft tests
 graft examples
