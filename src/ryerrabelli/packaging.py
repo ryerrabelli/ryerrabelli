@@ -121,7 +121,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
         "version": versioneer.get_version(),  # str that includes git commit id per PEP format
         "cmdclass": versioneer.get_cmdclass(),
         "package_dir": {
-            #"": "src"  # ensures that modules don't have to be referenced from src. first
+            "": "src"  # ensures that modules don't have to be referenced from src. first
         },
         "packages": setuptools.find_packages(where="src"),  # list, i.e. [""]
         "url": rsy.GITHUB_BASE + module_name,
