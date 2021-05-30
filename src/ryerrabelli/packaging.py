@@ -123,7 +123,7 @@ def get_module_data(module_name, extra_module_data=None, force=False):
         #"package_dir": {
         #    #"": "src"  # ensures that modules don't have to be referenced from src. first
         #},
-        #"packages": setuptools.find_packages(where="src"),  # list, i.e. [""]
+        "packages": setuptools.find_packages(where="src"),  # list, i.e. [""]
         "url": rsy.GITHUB_BASE + module_name,
         #"license": rsy.license_text,
         "author": rsy.NAME,
