@@ -130,9 +130,9 @@ def get_module_data(module_name, extra_module_data=None, force=False):
         "author_email": rsy.EMAIL,
         "description": "See long description",
         "install_requires": rsy.requirements,  # list of str
-        #"long_description": rsy.long_descrip,  # str
-        #"long_description_content_type":
-        #    extension_to_format(rsy.long_descrip_filename.split(".")[-1]),
+        "long_description": rsy.long_descrip,  # str
+        "long_description_content_type":
+            extension_to_format(rsy.long_descrip_filename.split(".")[-1]),
         "python_requires": ">=3.6",  # need python 3.6 or higher for f-strings
         "classifiers": [
             # How mature is this project? Common values are
