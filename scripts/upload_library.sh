@@ -70,7 +70,7 @@ fi
 
 if [ "$1" = "pypi" ]; then
   echo "Uploading to repository system pypi"
-  python -m twine upload "dist/ryerrabelli-$VERSION*"
+  python -m twine upload "dist/$PROJECT_NAME-$VERSION*"
 else
   echo "Uploading to repository system $UPLOAD_TO"
   python -m twine upload --repository "$UPLOAD_TO" "dist/$PROJECT_NAME-$VERSION*"
