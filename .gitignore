@@ -1,4 +1,16 @@
 # There is also a global .gitignore_global file in the home directory of my Macbook pro. It is connected to the
 # overall git system by the .gitconfig file
-*.pyc
-/venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

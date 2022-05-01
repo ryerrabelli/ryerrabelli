@@ -1,6 +1,6 @@
 #!/bin/sh
 # To change the permissions of this file so it can be run in terminal, do
-# chmod 755 upload_to_pypi.sh
+# chmod 755 upload_library.sh
 
 # To run, cd to the main project folder and run:
 # ./scripts/upload_to_pypi.sh
@@ -84,4 +84,3 @@ echo "Done uploading."
 
 # List saved outputs as confirmation check
 tar tzf "dist/$PROJECT_NAME-$VERSION.macosx-10.9-x86_64.tar.gz"
-
