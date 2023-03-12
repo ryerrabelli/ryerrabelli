@@ -3,7 +3,7 @@
 # chmod 755 upload_library.sh
 
 # To run, cd to the main project folder and run:
-# ./scripts/upload_to_pypi.sh
+# ./scripts/upload_library.sh
 # PyPI token credentials should be saved to $HOME/.pypirc in order to not have to type in the username and password
 # The username will be __token__. Password will be a long case-sensitive alphanumeric string starting with pypi-
 # twine should also aleady be installed i.e. by
