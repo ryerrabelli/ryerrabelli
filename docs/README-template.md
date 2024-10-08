@@ -22,7 +22,7 @@ My python projects usually follow the same general file structure:
     * `scripts/`        <- _optional, would contain `.sh` files in linux/mac_
       * [`save_ipynb.sh`](../src/scripts/save_ipynb.sh)       <- _a script that can be used to save the jupyter notebook files as .py and .html as well, which is easier for git version control and general viewing_
       * [`save_ipynb.sh`](../src/scripts/save_ipynb.sh)       <- _a script that creates an image file for your email address. This allows you to include it in the markdown file without having it easily accessible to web scrapers (to prevent email spam)_
-    * `notebooks/`       <- _jupyter/colab notebooks_
+    * `notebooks/`       <- _jupyter/colab notebooks. These are in sequential order with names like 01_filename.ipynb, 02_other_filename.ipynb etc. The notebooks are meant to be run in sequential order where file 01 sets up for file 02. Raw python and html files of each notebook are also included for reference_
   * `data/`       <- _data files i.e. .csv, jpg, etc  used as input for the code. This includes intermediate files which are output from one piece of code, but used as input for other pieces_
   * `outputs/`       <- _figures and other files which are terminal outputs from the code i.e. used solely for non-code usage and not as input for other code files_
   * [`versioneer.py`](../versioneer.py)       <- _must be here in the top level folder [^1]_
@@ -74,6 +74,6 @@ Rahul Sai Yerrabelli
 | ORCID          	| https://orcid.org/0000-0002-7670-9601                                                              	|
 | Google Scholar 	| https://scholar.google.com/citations?user=pEvGRdkAAAAJ                                             	|
 | LinkedIn       	| https://www.linkedin.com/in/ryerrabelli                                                            	|
-| Email          	| ![Email addresses as an image to prevent spam](docs/email-address-image.png "Email Addresses as Image") 	|
+| Email          	| ![Email addresses as an image to prevent spam](email-address-image.png "Email Addresses as Image") 	|
 
 Table generated using https://www.tablesgenerator.com/markdown_tables
